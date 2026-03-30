@@ -1,0 +1,18 @@
+#!name=国内App去广告全家桶（稳定版）
+#!desc=支持：百度 / 爱奇艺 / 腾讯视频 等（轻量稳定）
+#!author=ChatGPT
+
+[URL Rewrite]
+# ===== 通用广告 =====
+^https?:\/\/.*\/ad\/.* - reject
+^https?:\/\/.*\/ads\/.* - reject
+^https?:\/\/.*\/advert\/.* - reject
+
+# ===== 百度 =====
+^https?:\/\/.*\.baidu\.com\/.*ad.* - reject
+
+# ===== 腾讯系 =====
+^https?:\/\/.*\.qq\.com\/.*ad.* - reject
+
+# ===== 爱奇艺 =====
+^https?:\/\/.*\.iqiyi\.com\/.*ad.* - reject
