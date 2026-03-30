@@ -62,4 +62,4 @@ noreturn:
 # ===== 内置脚本结束 =====
 
 [MITM]
-hostname = www.quora.com
+hostname = %APPEND% www.quora.com
