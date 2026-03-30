@@ -1,0 +1,18 @@
+#!name=Spotify 去广告
+#!desc=过滤 Spotify 播放队列中的广告 track，屏蔽广告追踪域名
+#!author=Surge 适配
+#!version=1.0.0
+#!system=ios
+
+[Rule]
+# 广告追踪域名（不影响播放功能）
+DOMAIN,adeventtracker.spotify.com,REJECT
+DOMAIN,ads-fa.spotify.com,REJECT
+DOMAIN,audio2.spotify.com,REJECT
+
+[Script]
+Spotify-AdSkip = type=http-response,pattern=^https://spclient\.wg\.spotify\.com/melody/v1/playback_context,requires-body=true,max-size=131072,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/spotify_adskip.js
+Spotify-Gabo = type=http-response,pattern=^https://spclient\.wg\.spotify\.com/gabo-receiver-service/,requires-body=true,max-size=131072,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/spotify_adskip.js
+
+[MITM]
+hostname = %APPEND% spclient.wg.spotify.com

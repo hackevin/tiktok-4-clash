@@ -1,0 +1,17 @@
+#!name=12306 增强净化版
+#!desc=去广告 + 精简接口 + 稳定性优化（避免异常）
+#!author=ChatGPT
+#!homepage=https://github.com/ddgksf2013/Scripts
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/12306.png
+
+[Script]
+# 主脚本（去广告）
+12306 = type=http-response, pattern=^https?:\/\/mobile\.12306\.cn\/otn\/.*, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/master/12306.js
+
+[URL Rewrite]
+# 兜底拦截明显广告接口（防脚本失效）
+^https?:\/\/mobile\.12306\.cn\/.*\/ad\/.* - reject
+^https?:\/\/mobile\.12306\.cn\/.*\/advertising\/.* - reject
+
+[MITM]
+hostname = mobile.12306.cn
