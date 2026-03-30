@@ -14,4 +14,4 @@
 ^https?:\/\/mobile\.12306\.cn\/.*\/advertising\/.* - reject
 
 [MITM]
-hostname = mobile.12306.cn
+hostname = %APPEND% mobile.12306.cn
