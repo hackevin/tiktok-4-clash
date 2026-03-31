@@ -1,4 +1,4 @@
-#!name=车来了净化 (墨鱼版)
+#!name=车来了净化
 #!desc=去除车来了小程序及APP广告、底栏、隐私追踪等。由 ddgksf2013 原规则适配 Surge。
 #!author=ddgksf2013 & Grok适配
 #!update-url=https://raw.githubusercontent.com/ddgksf2013/Rewrite/refs/heads/master/AdBlock/CheLaiLeAds.conf
