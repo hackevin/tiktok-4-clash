@@ -1,4 +1,3 @@
-<script>
 try {
     let body = $response.body;
     let obj = JSON.parse(body);
@@ -37,4 +36,3 @@ noreturn:
 } catch (e) {
     $done({body});
 }
-</script>
