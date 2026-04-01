@@ -722,26 +722,19 @@ const urlHandlers = {
   resp_handlers: {
     "^https:\\/\\/api\\.zhihu\\.com\\/people\\/self$": processUserInfo,
     "^https:\\/\\/api\\.zhihu\\.com\\/root\\/tab\\/v2": modifyAppTabConfig,
-    "^https:\\/\\/(api|web-render)\\.zhihu\\.com\\/topstory\\/recommend":
-      removeRecommend,
-    "^https:\\/\\/api\\.zhihu\\.com\\/questions\\/\\d+\\/feeds":
-      removeQuestions,
-    "^https:\\/\\/api\\.zhihu\\.com\\/next-render\\?": modifyAnswersNextRender,
-    "^https:\\/\\/api\\.zhihu\\.com\\/notifications\\/v3\\/message":
-      removeMarketingMsg,
-    "^https:\\/\\/api\\.zhihu\\.com\\/comment_v5\\/(answers|pins|comments?|articles)\\/\\d+\\/(root|child)_comment":
-      removeComment,
-    "^https:\\/\\/(page-info|api)\\.zhihu\\.com\\/(answers|articles)\\/v2\\/\\d+":
-      removeAnswerOrArticleAd,
-    "^https:\\/\\/api\\.zhihu\\.com\\/articles\\/v\\d\\/\\d+":
-      removeAnswerOrArticleAd,
+    "^https:\\/\\/(api|web-render)\\.zhihu\\.com\\/topstory\\/recommend": removeRecommend,
+    "^https:\\/\\/api\\.zhihu\\.com\\/questions\\/\\d+\\/feeds": removeQuestions,
+    "^https:\\/\\/api\\.zhihu\\.com\\/next-render": modifyAnswersNextRender,
+    "^https:\\/\\/api\\.zhihu\\.com\\/notifications\\/v3\\/message": removeMarketingMsg,
+    "^https:\\/\\/api\\.zhihu\\.com\\/comment_v5\\/(answers|pins|comments?|articles)\\/\\d+\\/(root|child)_comment": removeComment,
+    "^https:\\/\\/(page-info|api)\\.zhihu\\.com\\/(answers|articles)\\/v2\\/\\d+": removeAnswerOrArticleAd,
+    "^https:\\/\\/api\\.zhihu\\.com\\/articles\\/v\\d\\/\\d+": removeAnswerOrArticleAd,
     "^https:\\/\\/api\\.zhihu\\.com\\/people\\/\\d+": autoInsertBlackList,
     "^https:\\/\\/api\\.zhihu\\.com\\/moments_v3\\?": removeMoments,
     "^https?:\\/\\/api\\.zhihu\\.com\\/topstory\\/hot-lists": removeHotListAds,
     "^https:\\/\\/api\\.zhihu\\.com\\/search\\/preset_words": removeKeywordAds,
     "^https:\\/\\/api\\.zhihu\\.com\\/search\\/recommend_query": removeQueryAds,
-    "^https:\\/\\/api\\.zhihu\\.com\\/settings\\/blocked_users":
-      manageBlackUser,
+    "^https:\\/\\/api\\.zhihu\\.com\\/settings\\/blocked_users": manageBlackUser,
   },
   req_handlers: {
     "^https:\\/\\/api\\.zhihu\\.com\\/feed-root\\/block": unlockBlockedKeywords,
