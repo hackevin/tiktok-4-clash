@@ -409,12 +409,16 @@ async function removeRecommend() {
   }
 }
 function isFiltered(e, t, r, n, o) {
-  if (
+if (
     "market_card" === e.type ||
     "feed_advert" === e.type ||
+    "commerce_card" === e.type ||
+    "paid_content" === e.type ||
     "SvipActivity" === e.extra?.type ||
     t.includes("盐选推荐") ||
-    e.hasOwnProperty("ad")
+    e.hasOwnProperty("ad") ||
+    e?.ad_info?.data ||
+    e?.extra?.is_ad === true
   )
     return ($.logger.debug(`${t}匹配到广告`), !0);
   if (
