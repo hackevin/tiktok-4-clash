@@ -5,17 +5,56 @@
 #!system=ios
 
 [Rule]
-# Duolingo 广告/追踪相关域名（仅供参考，效果有限）
-DOMAIN-SUFFIX,mopub.com,REJECT
+# Duolingo 广告推广接口
+URL-REGEX,^https?://ios-api-2\.duolingo\.cn/\d{4}-\d{2}-\d{2}/plus-promotions/,REJECT
+
+# 广告归因追踪
 DOMAIN-SUFFIX,appsflyer.com,REJECT
 DOMAIN-SUFFIX,adjust.com,REJECT
+DOMAIN-SUFFIX,adjust.io,REJECT
+DOMAIN-SUFFIX,mopub.com,REJECT
+
+# 数据分析
 DOMAIN-SUFFIX,amplitude.com,REJECT
+DOMAIN-SUFFIX,braze.com,REJECT
+
+# 广告投放网络
+DOMAIN-SUFFIX,googlesyndication.com,REJECT
+DOMAIN-SUFFIX,doubleclick.net,REJECT
+DOMAIN-SUFFIX,googleadservices.com,REJECT
+DOMAIN-SUFFIX,adcolony.com,REJECT
+DOMAIN-SUFFIX,unity3d.com,REJECT
+DOMAIN-SUFFIX,vungle.com,REJECT
+DOMAIN-SUFFIX,applovin.com,REJECT
+DOMAIN-SUFFIX,ironsource.com,REJECT
+DOMAIN-SUFFIX,chartboost.com,REJECT
 
 [Script]
 多邻国CN解锁 = type=http-response,pattern=^https?://ios-api-2\.duolingo\.cn/\d{4}-\d{2}-\d{2}/users/\d+,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/duolingo_unlock.js
 
 [URL Rewrite]
 ^https?://ios-api-2\.duolingo\.cn/\d{4}-\d{2}-\d{2}/plus-promotions/.* - reject
+# 广告追踪与归因
+^https?://.*\.appsflyer\.com/.* - reject
+^https?://.*\.adjust\.com/.* - reject
+^https?://.*\.adjust\.io/.* - reject
+^https?://.*\.mopub\.com/.* - reject
+
+# 数据分析/用户行为
+^https?://.*\.amplitude\.com/.* - reject
+^https?://.*\.braze\.com/.* - reject
+^https?://.*\.xtremepush\.com/.* - reject
+
+# 广告投放网络
+^https?://.*\.googlesyndication\.com/.* - reject
+^https?://.*\.doubleclick\.net/.* - reject
+^https?://.*\.googleadservices\.com/.* - reject
+^https?://.*adcolony\.com/.* - reject
+^https?://.*unityads\.unity3d\.com/.* - reject
+^https?://.*vungle\.com/.* - reject
+^https?://.*applovin\.com/.* - reject
+^https?://.*ironsource\.com/.* - reject
+^https?://.*chartboost\.com/.* - reject
 
 [MITM]
 hostname = %APPEND% ios-api-2.duolingo.cn
