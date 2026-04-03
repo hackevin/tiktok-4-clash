@@ -6,7 +6,7 @@
 
 [Rule]
 # 阻止 YouTube 走 QUIC/UDP 绕过规则（置于最前）
-AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
+# AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
 # YouTube 广告域名规则集
 RULE-SET,https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/youtube_noad.list,REJECT-DROP
 # 广告统计接口
