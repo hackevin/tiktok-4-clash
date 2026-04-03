@@ -1,13 +1,22 @@
 // duolingo_cn.js
 // 适用于 ios-api-2.duolingo.cn，修改用户数据解锁无限体力
 
+var url = $request ? $request.url : '';
+
+// http-request 类型：拦截广告配置接口
+if ($request && url.includes('/ads/')) {
+    $done({
+        status: "HTTP/1.1 200 OK",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adsEnabled: false, showAds: false })
+    });
+    return;
+}
+
+// http-response 类型：修改用户数据解锁体力
 var body = $response.body;
 var obj = JSON.parse(body);
 
-// 解锁 Plus
-obj.hasPlus = true;
-
-// 无限体力
 if (obj.health) {
     obj.health.useHealth = false;
     obj.health.unlimitedHeartsAvailable = true;
@@ -16,7 +25,10 @@ if (obj.health) {
     obj.health.secondsUntilNextHeartSegment = null;
 }
 
-// 关闭各课程的体力开关
+if (obj.hasPlus !== undefined) {
+    obj.hasPlus = true;
+}
+
 if (obj.courses) {
     obj.courses.forEach(function(course) {
         course.healthEnabled = false;
@@ -24,15 +36,3 @@ if (obj.courses) {
 }
 
 $done({ body: JSON.stringify(obj) });
-
-// duolingo_noad.js
-var url = $request.url;
-if (url.includes('/ads/')) {
-    $done({
-        status: "HTTP/1.1 200 OK",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ adsEnabled: false, showAds: false })
-    });
-} else {
-    $done({});
-}
