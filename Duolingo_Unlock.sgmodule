@@ -4,6 +4,25 @@
 #!version=2026.3.31
 #!system=ios
 
+[Rule]
+# 广告域名用 Rule，不需要 MITM，性能好
+DOMAIN-SUFFIX,appsflyer.com,REJECT
+DOMAIN-SUFFIX,adjust.com,REJECT
+DOMAIN-SUFFIX,adjust.io,REJECT
+DOMAIN-SUFFIX,mopub.com,REJECT
+DOMAIN-SUFFIX,amplitude.com,REJECT
+DOMAIN-SUFFIX,braze.com,REJECT
+DOMAIN-SUFFIX,googlesyndication.com,REJECT
+DOMAIN-SUFFIX,doubleclick.net,REJECT
+DOMAIN-SUFFIX,googleadservices.com,REJECT
+DOMAIN-SUFFIX,adcolony.com,REJECT
+DOMAIN-SUFFIX,unity3d.com,REJECT
+DOMAIN-SUFFIX,vungle.com,REJECT
+DOMAIN-SUFFIX,applovin.com,REJECT
+DOMAIN-SUFFIX,ironsource.com,REJECT
+DOMAIN-SUFFIX,chartboost.com,REJECT
+DOMAIN-SUFFIX,xtremepush.com,REJECT
+
 [Script]
 多邻国解锁 = type=http-response,pattern=^https?://ios-api\.duolingo\.(com|cn)/\d{4}-\d{2}-\d{2}/users/\d+,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/duolingo_unlock.js
 多邻国CN解锁 = type=http-response,pattern=^https?://ios-api-2\.duolingo\.(com|cn)/\d{4}-\d{2}-\d{2}/users/\d+,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/duolingo_unlock.js
