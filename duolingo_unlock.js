@@ -24,3 +24,15 @@ if (obj.courses) {
 }
 
 $done({ body: JSON.stringify(obj) });
+
+// duolingo_noad.js
+var url = $request.url;
+if (url.includes('/ads/')) {
+    $done({
+        status: "HTTP/1.1 200 OK",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adsEnabled: false, showAds: false })
+    });
+} else {
+    $done({});
+}
