@@ -57,11 +57,11 @@ DOMAIN-SUFFIX,googlesyndication.com,REJECT
 
 [URL Rewrite]
 # ===== 开屏 =====
-^https://app\.bilibili\.com/x/v2/splash/.* - reject
-^https://api\.bilibili\.com/x/v2/splash/.* - reject
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=start - reject
-^https:\/\/api\.meituan\.com\/.*launch.* - reject
-^https:\/\/mapi\.dianping\.com\/.*splash.* - reject
+^https://app\.bilibili\.com/x/v2/splash/.* - reject-200
+^https://api\.bilibili\.com/x/v2/splash/.* - reject-200
+^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=start - reject-200
+^https:\/\/api\.meituan\.com\/.*launch.* - reject-200
+^https:\/\/mapi\.dianping\.com\/.*splash.* - reject-200
 
 # ===== JSON去广告（安全增强）=====
 ^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index script-response-body bilibili_clean.js
