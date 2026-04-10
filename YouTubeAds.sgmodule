@@ -21,7 +21,7 @@ URL-REGEX,^https?://[\w-]+\.googlevideo\.com/(?!(dclk_video_ads|videoplayback\?)
 ^(https?://[\w-]+\.googlevideo\.com/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) $1$2$3 302
 
 [Script]
-YouTube-Ads = type=http-response,pattern=^https?://youtubei\.googleapis\.com/youtubei/v1/(browse|next|player|search|reel/reel_watch_sequence|guide|account/get_setting|get_watch),requires-body=true,max-size=131072,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/refs/heads/master/Script/Youtube/youtube.response.js
+YouTube-Ads = type=http-response,pattern=^https?://youtubei\.googleapis\.com/youtubei/v1/(browse|next|player|search|reel/reel_watch_sequence|guide|account/get_setting|get_watch),requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/refs/heads/master/Script/Youtube/youtube.response.js
 
 [MITM]
 hostname = %APPEND% *.googlevideo.com,-redirector*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com
