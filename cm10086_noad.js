@@ -1,3 +1,7 @@
+// 中国移动客户端去广告
+// 原作者: chatgpt
+// 版本: 2026-04-10
+
 (function () {
   // 中国移动首页净化（思路级）
   body = JSON.parse($response.body);
