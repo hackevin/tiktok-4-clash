@@ -44,6 +44,7 @@ DOMAIN-SUFFIX,googlesyndication.com,REJECT
 DOMAIN-SUFFIX,ad.10086.cn,REJECT
 
 URL-REGEX,^https?:\/\/.*(ad|ads|promotion|promo|banner).*,REJECT
+URL-REGEX,^https?:\/\/.*10086\.cn\/.*(activity|promotion|recommend).*,REJECT
 
 [URL Rewrite]
 # ===== 通用广告 =====
