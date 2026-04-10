@@ -1,7 +1,6 @@
 #!name=中国移动去广告
 #!desc=去除中国移动App开屏广告、弹窗广告（不影响咪咕视频、淘宝等正常功能）
 #!system=iOS
-#!requirement=CORE_VERSION>=20
 
 [MITM]
 hostname = %APPEND% *.10086.cn, *.doubleclick.net, *.googleadservices.com, *.googlesyndication.com, *.gdt.qq.com, *.mmstat.com, *.tanx.com
