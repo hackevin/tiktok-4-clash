@@ -16,7 +16,7 @@ DOMAIN,data.bilibili.com,REJECT
 
 [Script]
 # 推荐页广告卡片过滤
-B站_推荐页 = type=http-response,pattern=^https?://app\.bilibili\.com/x/v2/feed/index,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_adskip.js
+# B站_推荐页 = type=http-response,pattern=^https?://app\.bilibili\.com/x/v2/feed/index,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_adskip.js
 
 # 底部Tab净化（移除会员购、游戏中心）
 B站_Tab净化 = type=http-response,pattern=^https?://app\.bilibili\.com/x/v2/resource/show/tab,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_adskip.js
