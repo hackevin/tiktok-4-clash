@@ -56,6 +56,27 @@ DOMAIN-SUFFIX,googlesyndication.com,REJECT
 ^https?:\/\/.*\.iqiyi\.com\/.*ad.* - reject
 
 [URL Rewrite]
+# ===== 通用开屏（强匹配）=====
+^https://.*/splash - reject-200
+^https://.*/splash/.* - reject-200
+^https://.*/startup - reject-200
+^https://.*/startup/.* - reject-200
+^https://.*/launch - reject-200
+^https://.*/launch/.* - reject-200
+^https://.*/boot - reject-200
+
+# ===== 广告标识接口 =====
+^https://.*/ad/get - reject-200
+^https://.*/ad/list - reject-200
+^https://.*/ads - reject-200
+^https://.*/ads/.* - reject-200
+^https://.*/advert - reject-200
+
+# ===== 初始化广告 =====
+^https://.*/config/ads - reject-200
+^https://.*/init/ads - reject-200
+^https://.*/app/start - reject-200
+
 # ===== 开屏 =====
 ^https://app\.bilibili\.com/x/v2/splash/.* - reject-200
 ^https://api\.bilibili\.com/x/v2/splash/.* - reject-200
