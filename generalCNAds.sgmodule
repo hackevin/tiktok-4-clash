@@ -40,6 +40,11 @@ DOMAIN-SUFFIX,tracking.miui.com,REJECT
 DOMAIN-SUFFIX,doubleclick.net,REJECT
 DOMAIN-SUFFIX,googlesyndication.com,REJECT
 
+# === 10086 ===
+DOMAIN-SUFFIX,ad.10086.cn,REJECT
+
+URL-REGEX,^https?:\/\/.*(ad|ads|promotion|promo|banner).*,REJECT
+
 [URL Rewrite]
 # ===== 通用广告 =====
 ^https?:\/\/.*\/ad\/.* - reject
