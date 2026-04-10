@@ -21,7 +21,6 @@ DOMAIN,apm.zhihu.com,REJECT
 
 [Map Local]
 # ---- 原 URL-REGEX REJECT 接口，改为返回空 JSON（避免 app 报网络错误）----
-
 # 开屏广告
 ^https?://api\.zhihu\.com/commercial_api$ data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 # 回答下方广告
