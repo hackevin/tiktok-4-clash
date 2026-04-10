@@ -36,24 +36,24 @@
 
     // ---- 推荐页广告卡片过滤 ----
     // 接口: /x/v2/feed/index
+    // 注意：B站推荐页部分版本走 gRPC/Protobuf，JSON 脚本无法处理，暂时只做透传
     if (url.includes('/x/v2/feed/index')) {
         if (body.data && Array.isArray(body.data.items)) {
             body.data.items = body.data.items.filter(function (item) {
-                var cardType = item.card_type;
-                var cardGoto = item.card_goto;
-
-                if (!cardType || !cardGoto) return true;
+                var cardType = item.card_type || '';
+                var cardGoto = item.card_goto || '';
 
                 // Banner 广告
                 if (cardType === 'banner_v8' && cardGoto === 'banner') {
                     if (Array.isArray(item.banner_item)) {
-                        return !item.banner_item.some(function (v) {
+                        var hasAd = item.banner_item.some(function (v) {
                             return v.type === 'ad';
                         });
+                        if (hasAd) return false;
                     }
                 }
 
-                // 信息流广告 (cm_v2)
+                // 信息流广告 (cm_v2) — 只过滤明确已知的广告类型
                 if (cardType === 'cm_v2') {
                     var adGotos = [
                         'ad_web_s', 'ad_av', 'ad_web_gif',
@@ -68,9 +68,6 @@
 
                 // 游戏推广卡
                 if (cardType === 'small_cover_v10' && cardGoto === 'game') return false;
-
-                // 通用广告类型标记
-                if (cardType.indexOf('ad') !== -1) return false;
 
                 return true;
             });
