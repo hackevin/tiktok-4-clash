@@ -1,6 +1,44 @@
-#!name=国内App去广告全家桶（稳定版）
-#!desc=支持：百度 / 爱奇艺 / 腾讯视频 等（轻量稳定）
-#!author=ChatGPT
+#!name=国内App去广告增强（稳定版+）
+#!desc=B站/京东/美团等增强去广告，低风险
+#!system=ios
+
+[Rule]
+
+# === 通用广告SDK ===
+DOMAIN-SUFFIX,adjust.com,REJECT
+DOMAIN-SUFFIX,appsflyer.com,REJECT
+DOMAIN-SUFFIX,branch.io,REJECT
+
+# === 腾讯系 ===
+DOMAIN-SUFFIX,gdt.qq.com,REJECT
+DOMAIN-SUFFIX,adsmind.gdtimg.com,REJECT
+
+# === 阿里 / 京东 ===
+DOMAIN-SUFFIX,alimama.com,REJECT
+DOMAIN-SUFFIX,mmstat.com,REJECT
+DOMAIN-SUFFIX,jdad.jd.com,REJECT
+
+# === 字节系 ===
+DOMAIN-SUFFIX,pglstatp-toutiao.com,REJECT
+DOMAIN-SUFFIX,byteoversea.com,REJECT
+
+# === 百度系 ===
+DOMAIN-SUFFIX,mobads.baidu.com,REJECT
+DOMAIN,hm.baidu.com,REJECT
+
+# === 美团 / 点评 ===
+DOMAIN-SUFFIX,meituan.net,REJECT
+DOMAIN-SUFFIX,dianping.net,REJECT
+
+# === 网易 ===
+DOMAIN-SUFFIX,adgeo.163.com,REJECT
+
+# === 小米 ===
+DOMAIN-SUFFIX,tracking.miui.com,REJECT
+
+# === 谷歌 ===
+DOMAIN-SUFFIX,doubleclick.net,REJECT
+DOMAIN-SUFFIX,googlesyndication.com,REJECT
 
 [URL Rewrite]
 # ===== 通用广告 =====
@@ -16,3 +54,28 @@
 
 # ===== 爱奇艺 =====
 ^https?:\/\/.*\.iqiyi\.com\/.*ad.* - reject
+
+[URL Rewrite]
+
+# ===== 开屏广告 =====
+^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/list reject
+^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=start reject
+^https:\/\/api\.meituan\.com\/.*launch.* reject
+^https:\/\/mapi\.dianping\.com\/.*splash.* reject
+
+# ===== JSON去广告（安全增强）=====
+^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index script-response-body bilibili_clean.js
+^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home script-response-body jd_clean.js
+^https:\/\/api\.meituan\.com\/.*recommend.* script-response-body meituan_clean.js
+
+[Script]
+
+bilibili_clean.js = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index,requires-body=1,max-size=0,script-path=bilibili_clean.js
+
+jd_clean.js = type=http-response,pattern=^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home,requires-body=1,max-size=0,script-path=jd_clean.js
+
+meituan_clean.js = type=http-response,pattern=^https:\/\/api\.meituan\.com\/.*recommend.*,requires-body=1,max-size=0,script-path=meituan_clean.js
+
+
+[MITM]
+hostname = %APPEND% app.bilibili.com,api.bilibili.com,api.m.jd.com,api.meituan.com,mapi.dianping.com
