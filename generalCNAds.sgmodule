@@ -111,7 +111,7 @@ URL-REGEX,^https?:\/\/.*10086\.cn\/.*(activity|promotion|recommend).*,REJECT
 bilibili_clean.js = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_clean.js
 jd_clean.js = type=http-response,pattern=^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/jd_clean.js
 meituan_clean.js = type=http-response,pattern=^https:\/\/api\.meituan\.com\/.*recommend.*,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/meituan_clean.js
-ChinaMobile = type=http-response,pattern=^https:\/\/.*10086\.cn\/.*,requires-body=true，script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/cm10086_noad.js
+ChinaMobile = type=http-response,pattern=^https:\/\/.*10086\.cn\/.*|^https:\/\/.*cmcc\.cn\/.*,requires-body=true，script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/cm10086_noad.js
 
 [MITM]
 hostname = %APPEND% app.bilibili.com,api.bilibili.com,api.m.jd.com,api.meituan.com,mapi.dianping.com,*.10086.cn, *.cmcc.cn
