@@ -70,11 +70,11 @@ DOMAIN-SUFFIX,googlesyndication.com,REJECT
 
 [Script]
 
-bilibili_clean.js = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index,requires-body=1,max-size=0,script-path=bilibili_clean.js
+bilibili_clean.js = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_clean.js
 
-jd_clean.js = type=http-response,pattern=^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home,requires-body=1,max-size=0,script-path=jd_clean.js
+jd_clean.js = type=http-response,pattern=^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/jd_clean.js
 
-meituan_clean.js = type=http-response,pattern=^https:\/\/api\.meituan\.com\/.*recommend.*,requires-body=1,max-size=0,script-path=meituan_clean.js
+meituan_clean.js = type=http-response,pattern=^https:\/\/api\.meituan\.com\/.*recommend.*,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/meituan_clean.js
 
 
 [MITM]
