@@ -3,29 +3,27 @@
 #!system=iOS
 
 [MITM]
-# 精确缩小 MITM 范围，避免劫持业务数据
-hostname = %APPEND% ad.10086.cn, adcdn.10086.cn, msg.10086.cn, promotion.10086.cn
+hostname = %APPEND% *.10086.cn
 
 [Rule]
-# [核心广告拦截]
+# 核心广告域名拦截
 DOMAIN,ad.10086.cn,REJECT
 DOMAIN,adcdn.10086.cn,REJECT
 DOMAIN,msg.10086.cn,REJECT
-# 拦截阿里系移动调度中心（常用于下发广告配置）
+DOMAIN,promotion.10086.cn,REJECT
 DOMAIN,amdc.m.taobao.com,REJECT
 
-# [SDK 拦截 - 防止摇一摇跳转]
+# SDK 拦截 - 防止摇一摇跳转（穿山甲广告域名）
 DOMAIN-SUFFIX,pglstatp-toutiao.com,REJECT
 DOMAIN-SUFFIX,pglstatp-toutiao.co,REJECT
-DOMAIN-KEYWORD,pangolin-sdk,REJECT
 
-https://ahrefs.com/writing-tools/paragraph-rewriter
-# 1. 拦截开屏配置（匹配常见的 config/startup 路径）
-^https?:\/\/.*\.10086\.cn\/.*\/startup\/.*$ - reject
-^https?:\/\/.*\.10086\.cn\/.*\/config\/.*(ad|splash|popup) - reject
+[URL Rewrite]
+# 1. 拦截开屏配置（正确格式：正则 _ reject）
+^https?://[^/]+\.10086\.cn/.*/startup/.* - reject
+^https?://[^/]+\.10086\.cn/.*/config/.*(ad|splash|popup) - reject
 
-# 2. 针对性屏蔽“我的”页面多余的红点或Banner提示
-^https?:\/\/.*\.10086\.cn\/.*\/user\/red-dot - reject
+# 2. 拦截“我的”页面红点/Banner
+^https?://[^/]+\.10086\.cn/.*/red-dot - reject
 
-# 3. 屏蔽咪咕视频的预加载广告
-^https?:\/\/ad\.cmvideo\.cn\/.* - reject
+# 3. 屏蔽咪咕视频预加载广告
+^https?://ad\.cmvideo\.cn/.* - reject
