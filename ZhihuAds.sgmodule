@@ -1,7 +1,7 @@
 #!name=知乎净化
 #!desc=去除开屏广告、信息流广告、回答页推广、评论广告、营销消息，本地伪装 VIP 解锁关键词屏蔽
 #!author=blackmatrix7 (hackevin 适配，脚本自托管)
-#!version=3.0.0
+#!version=3.1.0
 #!system=ios
 
 [Rule]
@@ -19,26 +19,30 @@ DOMAIN,appcloud2.in.zhihu.com,REJECT
 DOMAIN,duga.zhihu.com,REJECT
 DOMAIN,apm.zhihu.com,REJECT
 
-# 开屏广告
-URL-REGEX,^https?://api\.zhihu\.com/commercial_api,REJECT
-# 回答下方广告
-URL-REGEX,^https?://api\.zhihu\.com/commercial_api/answer/\d+/bottom-v2,REJECT
-# 无用请求
-URL-REGEX,^https?://api\.zhihu\.com/message-push/event,REJECT
-# 付费回答营销引导
-URL-REGEX,^https?://api\.zhihu\.com/guide_center/strategy,REJECT
-# 会员页浮动广告
-URL-REGEX,^https?://api\.zhihu\.com/bazaar/float_window,REJECT
-# 数据上报
-URL-REGEX,^https?://api\.zhihu\.com/metrics/report,REJECT
-# 通知设置
-URL-REGEX,^https?://api\.zhihu\.com/settings/new/notification,REJECT
-# 会员相关广告
-URL-REGEX,^https?://api\.zhihu\.com/bazaar/vip_tab/header,REJECT
-
 [Map Local]
+# ---- 原 URL-REGEX REJECT 接口，改为返回空 JSON（避免 app 报网络错误）----
+
+# 开屏广告
+^https?://api\.zhihu\.com/commercial_api$ data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 回答下方广告
+^https?://api\.zhihu\.com/commercial_api/answer/\d+/bottom-v2 data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 无用请求
+^https?://api\.zhihu\.com/message-push/event data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 付费回答营销引导
+^https?://api\.zhihu\.com/guide_center/strategy data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 会员页浮动广告
+^https?://api\.zhihu\.com/bazaar/float_window data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 数据上报
+^https?://api\.zhihu\.com/metrics/report data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 通知设置
+^https?://api\.zhihu\.com/settings/new/notification data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 会员相关广告
+^https?://api\.zhihu\.com/bazaar/vip_tab/header data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+
+# ---- 原有 Map Local 规则 ----
+
 # 消息通知角标
-^https?://api\.zhihu\.com/(notifications/v\d/count) data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+^https?://api\.zhihu\.com/notifications/v\d/count data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 # 推荐页顶部广告
 ^https?://api\.zhihu\.com/root/window data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 # 应用内弹窗
@@ -66,7 +70,7 @@ URL-REGEX,^https?://api\.zhihu\.com/bazaar/vip_tab/header,REJECT
 哲也_推荐页 = type=http-response,pattern=^https://(api|web-render)\.zhihu\.com/topstory/recommend,requires-body=true,max-size=0,timeout=30,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/zhihu_adskip.js
 
 # 回答列表去广告
-哲也_回答列表 = type=http-response,pattern=^https://api\.zhihu\.com/questions/\d+/feeds?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/zhihu_adskip.js
+哲也_回答列表 = type=http-response,pattern=^https://api\.zhihu\.com/questions/\d+/feeds,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/zhihu_adskip.js
 
 # 回答信息流去广告
 哲也_回答信息流 = type=http-response,pattern=^https?://api\.zhihu\.com/next-render,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/zhihu_adskip.js
@@ -87,7 +91,7 @@ URL-REGEX,^https?://api\.zhihu\.com/bazaar/vip_tab/header,REJECT
 哲也_关注页 = type=http-response,pattern=^https?://api\.zhihu\.com/moments_v3\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/zhihu_adskip.js
 
 # 热榜去广告
-哲也_热榜 = type=http-response,pattern=^https?://api\.zhihu\.com/topstory/hot-lists(\?|/),requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/zhihu_adskip.js
+哲也_热榜 = type=http-response,pattern=^https?://api\.zhihu\.com/topstory/hot-lists[?/],requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/zhihu_adskip.js
 
 # 搜索页预置广告
 哲也_搜索预置词 = type=http-response,pattern=^https?://api\.zhihu\.com/search/preset_words\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/zhihu_adskip.js
