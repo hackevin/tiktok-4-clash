@@ -1,48 +1,31 @@
-#!name=中国移动去广告
-#!desc=去除中国移动App开屏广告、弹窗广告（不影响咪咕视频、淘宝等正常功能）
+#!name=中国移动去广告进阶版
+#!desc=精细化过滤开屏、弹窗及首页牛皮癣广告，优化加载速度
 #!system=iOS
 
 [MITM]
-hostname = %APPEND% *.10086.cn, *.doubleclick.net, *.googleadservices.com, *.googlesyndication.com, *.gdt.qq.com, *.mmstat.com, *.tanx.com
+# 精确缩小 MITM 范围，避免劫持业务数据
+hostname = %APPEND% ad.10086.cn, adcdn.10086.cn, msg.10086.cn, promotion.10086.cn
 
 [Rule]
-# ========== 中国移动广告域名 ==========
-DOMAIN-SUFFIX,ad.10086.cn,REJECT
-DOMAIN-SUFFIX,adcdn.10086.cn,REJECT
-DOMAIN-SUFFIX,adserver.10086.cn,REJECT
-DOMAIN-SUFFIX,msg.10086.cn,REJECT
-DOMAIN-SUFFIX,push.10086.cn,REJECT
-DOMAIN-SUFFIX,notice.10086.cn,REJECT
-DOMAIN-SUFFIX,promotion.10086.cn,REJECT
-DOMAIN-SUFFIX,marketing.10086.cn,REJECT
+# [核心广告拦截]
+DOMAIN,ad.10086.cn,REJECT
+DOMAIN,adcdn.10086.cn,REJECT
+DOMAIN,msg.10086.cn,REJECT
+# 拦截阿里系移动调度中心（常用于下发广告配置）
+DOMAIN,amdc.m.taobao.com,REJECT
 
-# ========== 第三方广告联盟 ==========
-DOMAIN-SUFFIX,doubleclick.net,REJECT
-DOMAIN-SUFFIX,googleadservices.com,REJECT
-DOMAIN-SUFFIX,googlesyndication.com,REJECT
-# DOMAIN-SUFFIX,gstatic.com,REJECT   # 已注释，避免误杀验证码等
-DOMAIN-SUFFIX,mmstat.com,REJECT
-DOMAIN-SUFFIX,tanx.com,REJECT
-DOMAIN-SUFFIX,alimama.com,REJECT
+# [SDK 拦截 - 防止摇一摇跳转]
+DOMAIN-SUFFIX,pglstatp-toutiao.com,REJECT
+DOMAIN-SUFFIX,pglstatp-toutiao.co,REJECT
+DOMAIN-KEYWORD,pangolin-sdk,REJECT
 
-# ========== 淘宝广告子域名（不影响主站） ==========
-DOMAIN-SUFFIX,ad-taobao.com,REJECT
-DOMAIN-SUFFIX,adsrc.taobao.com,REJECT
-DOMAIN-SUFFIX,simba.taobao.com,REJECT
+https://ahrefs.com/writing-tools/paragraph-rewriter
+# 1. 拦截开屏配置（匹配常见的 config/startup 路径）
+^https?:\/\/.*\.10086\.cn\/.*\/startup\/.*$ - reject
+^https?:\/\/.*\.10086\.cn\/.*\/config\/.*(ad|splash|popup) - reject
 
-# ========== 腾讯广告系 ==========
-DOMAIN-SUFFIX,adsmind.gdtimg.com,REJECT
-DOMAIN-SUFFIX,gdt.qq.com,REJECT
-DOMAIN-SUFFIX,mi.gdt.qq.com,REJECT
+# 2. 针对性屏蔽“我的”页面多余的红点或Banner提示
+^https?:\/\/.*\.10086\.cn\/.*\/user\/red-dot - reject
 
-# ========== 咪咕视频（仅拦截广告子域名，不影响播放） ==========
-DOMAIN-SUFFIX,ad.cmvideo.cn,REJECT
-DOMAIN-SUFFIX,ads.cmvideo.cn,REJECT
-DOMAIN-SUFFIX,ad.miguvideo.com,REJECT
-
-[URL Rewrite]
-# 中国移动路径广告拦截
-^https?://.*\.10086\.cn/.*/(ad|banner|popup|splash|startup|advertisement|promotion|marketing|notice)/.* REJECT
-
-# 咪咕视频路径广告拦截（不拦截整个域名）
-^https?://.*\.(cmvideo\.cn|miguvideo\.com)/.*/(ad|advert|banner|popup|splash)/.* REJECT
+# 3. 屏蔽咪咕视频的预加载广告
+^https?:\/\/ad\.cmvideo\.cn\/.* - reject
