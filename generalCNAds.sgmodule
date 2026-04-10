@@ -63,12 +63,14 @@ DOMAIN,ad.10086.cn,REJECT
 # === 大众点评开屏广告 ===
 ^https?://mapi\.dianping\.com/.*splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
-# === 中国移动开屏广告（新域名，2024+ 版本）===
+# === 中国移动开屏广告 ===
+# 广告列表接口（核心，拦截此接口可阻止广告展示）
+^https?://client\.app\.coc\.10086\.cn/biz-orange/DN/explorePage/getAdverList data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 初始化接口（旧版本）
 ^https?://client\.app\.coc\.10086\.cn/biz-orange/DN/init/startInit data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
-^https?://h\.app\.coc\.10086\.cn/ngpsie/psieappaiddsdkserver/merger/getSwitchAndInitList data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
-
-# === 中国移动开屏广告（旧域名兜底）===
 ^https?://clientaccess\.10086\.cn/biz-orange/DN/init/startInit data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# 开关配置接口
+^https?://h\.app\.coc\.10086\.cn/ngpsie/psieappaiddsdkserver/merger/getSwitchAndInitList data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
 [Script]
 # B站去广告（需仓库内有 bilibili_adskip.js）
