@@ -18,7 +18,7 @@ DOMAIN, alitui.weibo.com, REJECT
 DOMAIN, amdc.m.taobao.com, REJECT
 
 # 拒绝开屏广告请求 (静态路径)
-^https?:\/\/ad\.api\.moji\.com\/get_ads_v3 - reject
+URL-REGEX, ^https?://ad\.api\.moji\.com/get_ads_v3, REJECT
 
 [Script]
 # 脚本处理 (动态内容剥离)
