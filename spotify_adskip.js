@@ -1,9 +1,23 @@
 // spotify_adskip.js
 // 过滤 Spotify iOS 播放队列中的广告 track
 
+// spotify_adskip.js
 var body = $response.body;
 
 if (!body || body.length === 0) {
+    $done({});
+    return;
+}
+
+// 防止 Protobuf / 二进制响应导致 illegal buffer
+if (typeof body !== 'string' || body.charCodeAt(0) < 32 && body.charCodeAt(0) !== 9 && body.charCodeAt(0) !== 10 && body.charCodeAt(0) !== 13) {
+    $done({});
+    return;
+}
+
+// 快速判断是否为 JSON（必须以 { 或 [ 开头）
+var firstChar = body.trimLeft().charAt(0);
+if (firstChar !== '{' && firstChar !== '[') {
     $done({});
     return;
 }
