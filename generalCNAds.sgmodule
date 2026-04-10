@@ -63,8 +63,11 @@ DOMAIN,ad.10086.cn,REJECT
 # === 大众点评开屏广告 ===
 ^https?://mapi\.dianping\.com/.*splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
-# === 移动开屏广告 ===
-^https?://[^/]*\.10086\.cn/.*/(activity|promotion|recommend|splash|ad｜startInit) data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+# === 中国移动开屏广告（新域名，2024+ 版本）===
+^https?://client\.app\.coc\.10086\.cn/biz-orange/DN/init/startInit data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+^https?://h\.app\.coc\.10086\.cn/ngpsie/psieappaiddsdkserver/merger/getSwitchAndInitList data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+
+# === 中国移动开屏广告（旧域名兜底）===
 ^https?://clientaccess\.10086\.cn/biz-orange/DN/init/startInit data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
 [Script]
