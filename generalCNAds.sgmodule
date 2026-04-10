@@ -1,117 +1,74 @@
-#!name=国内App去广告增强（稳定版+）
-#!desc=B站/京东/美团等增强去广告，低风险
+#!name=国内App去广告增强
+#!desc=通用广告SDK拦截 + B站/京东/美团/移动开屏去广告
+#!author=claude
+#!version=2.0.0
 #!system=ios
 
 [Rule]
 
-# === 通用广告SDK ===
+# === 通用广告追踪 SDK ===
 DOMAIN-SUFFIX,adjust.com,REJECT
 DOMAIN-SUFFIX,appsflyer.com,REJECT
 DOMAIN-SUFFIX,branch.io,REJECT
 
-# === 腾讯系 ===
+# === 腾讯广告 ===
 DOMAIN-SUFFIX,gdt.qq.com,REJECT
 DOMAIN-SUFFIX,adsmind.gdtimg.com,REJECT
 
-# === 阿里 / 京东 ===
+# === 阿里广告 ===
 DOMAIN-SUFFIX,alimama.com,REJECT
 DOMAIN-SUFFIX,mmstat.com,REJECT
-DOMAIN-SUFFIX,jdad.jd.com,REJECT
 
-# === 字节系 ===
+# === 京东广告 ===
+DOMAIN,jdad.jd.com,REJECT
+
+# === 字节广告 ===
 DOMAIN-SUFFIX,pglstatp-toutiao.com,REJECT
 DOMAIN-SUFFIX,byteoversea.com,REJECT
 
-# === 百度系 ===
-DOMAIN-SUFFIX,mobads.baidu.com,REJECT
+# === 百度广告 ===
+DOMAIN,mobads.baidu.com,REJECT
 DOMAIN,hm.baidu.com,REJECT
 
-# === 美团 / 点评 ===
-DOMAIN-SUFFIX,meituan.net,REJECT
-DOMAIN-SUFFIX,dianping.net,REJECT
+# === 美团广告（仅广告子域，不拦截主域）===
+DOMAIN,ad.meituan.com,REJECT
+DOMAIN,adfront.meituan.com,REJECT
+DOMAIN,ad.dianping.com,REJECT
 
-# === 网易 ===
-DOMAIN-SUFFIX,adgeo.163.com,REJECT
+# === 网易广告 ===
+DOMAIN,adgeo.163.com,REJECT
 
-# === 小米 ===
-DOMAIN-SUFFIX,tracking.miui.com,REJECT
+# === 小米追踪 ===
+DOMAIN,tracking.miui.com,REJECT
 
-# === 谷歌 ===
+# === 谷歌广告（国内 app 内嵌）===
 DOMAIN-SUFFIX,doubleclick.net,REJECT
 DOMAIN-SUFFIX,googlesyndication.com,REJECT
 
-# === 10086 ===
-DOMAIN-SUFFIX,ad.10086.cn,REJECT
+# === 移动广告域名 ===
+DOMAIN,ad.10086.cn,REJECT
 
-URL-REGEX,^https?:\/\/.*(ad|ads|promotion|promo|banner).*,REJECT
-URL-REGEX,^https?:\/\/.*10086\.cn\/.*(activity|promotion|recommend).*,REJECT
+[Map Local]
 
-[URL Rewrite]
-# ===== 通用广告 =====
-^https?:\/\/.*\/ad\/.* - reject
-^https?:\/\/.*\/ads\/.* - reject
-^https?:\/\/.*\/advert\/.* - reject
+# === B站开屏广告 ===
+^https?://app\.bilibili\.com/x/v2/splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+^https?://api\.bilibili\.com/x/v2/splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
-# ===== 百度 =====
-^https?:\/\/.*\.baidu\.com\/.*ad.* - reject
+# === 京东开屏广告 ===
+^https?://api\.m\.jd\.com/client\.action\?functionId=startUp data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
-# ===== 腾讯系 =====
-^https?:\/\/.*\.qq\.com\/.*ad.* - reject
+# === 美团开屏广告 ===
+^https?://wmapi\.meituan\.com/api/v\d+/loadInfo data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
-# ===== 爱奇艺 =====
-^https?:\/\/.*\.iqiyi\.com\/.*ad.* - reject
+# === 大众点评开屏广告 ===
+^https?://mapi\.dianping\.com/.*splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
-[URL Rewrite]
-# ===== 通用开屏（强匹配）=====
-^https://.*/splash - reject-200
-^https://.*/splash/.* - reject-200
-^https://.*/startup - reject-200
-^https://.*/startup/.* - reject-200
-^https://.*/launch - reject-200
-^https://.*/launch/.* - reject-200
-^https://.*/boot - reject-200
-
-# ===== 广告标识接口 =====
-^https://.*/ad/get - reject-200
-^https://.*/ad/list - reject-200
-^https://.*/ads - reject-200
-^https://.*/ads/.* - reject-200
-^https://.*/advert - reject-200
-
-# ===== 初始化广告 =====
-^https://.*/config/ads - reject-200
-^https://.*/init/ads - reject-200
-^https://.*/app/start - reject-200
-
-# ===== 开屏 =====
-^https://app\.bilibili\.com/x/v2/splash/.* - reject-200
-^https://api\.bilibili\.com/x/v2/splash/.* - reject-200
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=start - reject-200
-^https:\/\/api\.meituan\.com\/.*launch.* - reject-200
-^https:\/\/mapi\.dianping\.com\/.*splash.* - reject-200
-^https://api\.bilibili\.com/x/v2/activity/.* - reject-200
-
-# ===== JSON去广告（安全增强）=====
-^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index script-response-body bilibili_clean.js
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home script-response-body jd_clean.js
-^https:\/\/api\.meituan\.com\/.*recommend.* script-response-body meituan_clean.js
-^https://api\.bilibili\.com/x/v2/account/mine - script-response-body bilibili_clean.js
-
-# ===== 深度净化 =====
-^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index script-response-body bilibili_clean.js
-^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/region script-response-body bilibili_clean.js
-
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home script-response-body jd_clean.js
-^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=search script-response-body jd_clean.js
-
-^https:\/\/api\.meituan\.com\/.*recommend.* script-response-body meituan_clean.js
-^https:\/\/api\.meituan\.com\/.*search.* script-response-body meituan_clean.js
+# === 移动开屏广告 ===
+^https?://[^/]*\.10086\.cn/.*/(activity|promotion|recommend|splash|ad) data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
 [Script]
-bilibili_clean.js = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_clean.js
-jd_clean.js = type=http-response,pattern=^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/jd_clean.js
-meituan_clean.js = type=http-response,pattern=^https:\/\/api\.meituan\.com\/.*recommend.*,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/meituan_clean.js
-ChinaMobile = type=http-response,pattern=^https:\/\/.*10086\.cn\/.*|^https:\/\/.*cmcc\.cn\/.*,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/cm10086_noad.js
+# B站去广告（需仓库内有 bilibili_adskip.js）
+Bilibili去广告 = type=http-response,pattern=^https?://app\.bilibili\.com/x/v2/feed/index,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_adskip.js
 
 [MITM]
-hostname = %APPEND% app.bilibili.com,api.bilibili.com,api.m.jd.com,api.meituan.com,mapi.dianping.com,*.10086.cn, *.cmcc.cn
+hostname = %APPEND% app.bilibili.com,api.bilibili.com,api.m.jd.com,wmapi.meituan.com,mapi.dianping.com,*.10086.cn,*.cmcc.cn
