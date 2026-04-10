@@ -2,9 +2,6 @@
 #!desc=精细化过滤开屏、弹窗及首页牛皮癣广告，优化加载速度
 #!system=ios
 
-[MITM]
-hostname = %APPEND% *.10086.cn
-
 [Rule]
 # 核心广告域名拦截
 DOMAIN,ad.10086.cn,REJECT
@@ -27,3 +24,6 @@ DOMAIN-SUFFIX,pglstatp-toutiao.co,REJECT
 
 # 3. 屏蔽咪咕视频预加载广告
 ^https?://ad\.cmvideo\.cn/.* - reject
+
+[MITM]
+hostname = %APPEND% *.10086.cn
