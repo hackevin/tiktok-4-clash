@@ -51,8 +51,8 @@ DOMAIN,ad.10086.cn,REJECT
 [Map Local]
 
 # === B站开屏广告 ===
-^https?://app\.bilibili\.com/x/v2/splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
-^https?://api\.bilibili\.com/x/v2/splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+#^https?://app\.bilibili\.com/x/v2/splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
+#^https?://api\.bilibili\.com/x/v2/splash data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
 
 # === 京东开屏广告 ===
 ^https?://api\.m\.jd\.com/client\.action\?functionId=startUp data="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/blank/blank_dict.json"
@@ -68,7 +68,7 @@ DOMAIN,ad.10086.cn,REJECT
 
 [Script]
 # B站去广告（需仓库内有 bilibili_adskip.js）
-Bilibili去广告 = type=http-response,pattern=^https?://app\.bilibili\.com/x/v2/feed/index,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_adskip.js
+#Bilibili去广告 = type=http-response,pattern=^https?://app\.bilibili\.com/x/v2/feed/index,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/hackevin/tiktok-ruleset/refs/heads/main/bilibili_adskip.js
 
 [MITM]
 hostname = %APPEND% app.bilibili.com,api.bilibili.com,api.m.jd.com,wmapi.meituan.com,mapi.dianping.com,*.10086.cn,*.cmcc.cn
