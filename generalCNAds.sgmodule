@@ -62,11 +62,13 @@ DOMAIN-SUFFIX,googlesyndication.com,REJECT
 ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=start - reject-200
 ^https:\/\/api\.meituan\.com\/.*launch.* - reject-200
 ^https:\/\/mapi\.dianping\.com\/.*splash.* - reject-200
+^https://api\.bilibili\.com/x/v2/activity/.* - reject-200
 
 # ===== JSON去广告（安全增强）=====
 ^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index script-response-body bilibili_clean.js
 ^https:\/\/api\.m\.jd\.com\/client\.action\?functionId=home script-response-body jd_clean.js
 ^https:\/\/api\.meituan\.com\/.*recommend.* script-response-body meituan_clean.js
+^https://api\.bilibili\.com/x/v2/account/mine - script-response-body bilibili_clean.js
 
 # ===== 深度净化 =====
 ^https:\/\/api\.bilibili\.com\/x\/v2\/feed\/index script-response-body bilibili_clean.js
